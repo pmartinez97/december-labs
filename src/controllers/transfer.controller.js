@@ -7,6 +7,7 @@ const { convertCurrency } = require('../utils/currency');
 const TOTAL_ACCOUNTS_ON_TRANSFER = 2
 
 async function create(req, res, next) {
+  const userId = req.headers['user-id']
   const transferInfo = req.body;
   const transaction = await models.sequelize.transaction();
   try {
@@ -29,6 +30,11 @@ async function create(req, res, next) {
 
     const fromAccount = transferAccounts.find( account => account.accountId === transferInfo.accountFrom );
     const toAccount = transferAccounts.find( account => account.accountId === transferInfo.accountTo );
+
+    if ( fromAccount.userId != userId ) {
+      throw new ApiError(httpStatus.BAD_REQUEST, 'This user does not have the necessary permissions to execute this action');
+    }
+
     const mustHaveAmount = shouldChargeTransaction(fromAccount.userId, toAccount.userId) ? transferInfo.amount * process.env.COMISSION_MULTIPLIER : transferInfo.amount;
 
     // Check if sender account has has enough funds

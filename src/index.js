@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routes = require('./routes');
 const { errorConverter, errorHandler } = require('./middleware/error');
+const auth = require("./middleware/auth")
 require("dotenv").config();
 
 const APP_PORT = process.env.PORT || 4000
@@ -18,7 +19,7 @@ app.get('/', async (req, res) => {
   res.status(200).send('Challenge accepted');
 });
 
-app.use('/api', routes);
+app.use('/api', auth ,routes);
 
 // convert error to ApiError, if needed
 app.use(errorConverter);
