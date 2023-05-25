@@ -1,0 +1,54 @@
+{
+  "name": "december-labs",
+  "version": "1.0.0",
+  "description": "Code challenge for December Labs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "pre-commit": "eslint --ignore-path .gitignore",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmartinez97/december-labs.git"
+  },
+  "author": "Pablo Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmartinez97/december-labs/issues"
+  },
+  "homepage": "https://github.com/pmartinez97/december-labs#readme",
+  "dependencies": {
+    "axios": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-status": "^1.6.2",
+    "pg": "^8.11.0",
+    "redis": "^2.6.3",
+    "sequelize": "^6.31.1",
+    "sequelize-cli": "^6.6.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --tab-width 2",
+      "pre-commit"
+    ]
+  }
+}
