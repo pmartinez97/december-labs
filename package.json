@@ -9,7 +9,8 @@
     "pre-commit": "eslint --ignore-path .gitignore",
     "migrate": "npx sequelize db:migrate",
     "seed": "npx sequelize db:seed:all",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\"",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,7 @@
   },
   "devDependencies": {
     "eslint": "^8.41.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8"
