@@ -4,6 +4,7 @@ const redisClient = require('../services/redis.service')
 const redisHelper = require('../utils/redisHelper');
 const ApiError = require('../utils/ApiError');
 const axios = require('axios');
+const fixerConfig = require('../config/fixerAPI');
 
 const CURRENCY_RATE_KEY = 'currencies'
 const CURRENCIES_SUPPORTED = 'UYU,USD,EUR'
@@ -50,12 +51,12 @@ async function getCurrenciesFixerAPI() {
   const requestOptions = {
     method: 'GET',
     headers: {
-      'apikey': process.env.FIXER_API_KEY
+      'apikey': fixerConfig.fixerApiKey
     }
   }
 
   try {
-    const response = await axios.get(`${process.env.FIXER_API_URL}/latest?symbols=${CURRENCIES_SUPPORTED}&base=${BASE_CURRENCY}`, requestOptions);
+    const response = await axios.get(`${fixerConfig.fixerApiUrl}/latest?symbols=${CURRENCIES_SUPPORTED}&base=${BASE_CURRENCY}`, requestOptions);
 
     return response.data;
   } catch(error) {

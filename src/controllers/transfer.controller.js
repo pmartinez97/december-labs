@@ -43,8 +43,8 @@ async function create(req, res, next) {
     }
 
     let amount = transferInfo.amount; // Be careful not to use mustHaveAmount to calculate the amount that the recipient account will receive
-    // Check if the currencies of the accounts are different
 
+    // Check if the currencies of the accounts are different
     if ( shouldConvertCurrency(fromAccount.currencyId, toAccount.currencyId) ) {
       amount = await convertCurrency(
         {
@@ -97,7 +97,6 @@ async function create(req, res, next) {
   }
 }
 
-// If the transfer is made between two accounts of the same user
 function shouldChargeTransaction(userFrom, userTo) {
   return userFrom !== userTo
 }
